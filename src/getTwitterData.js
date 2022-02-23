@@ -9,15 +9,24 @@ let twitter  = new Twit({
 });
 
 /**Parametros: 1,2,3,4 */
-async function getData(codigo) {
-  const data = await twitter.get(`https://api.twitter.com/2/users/${codigo}/following?user.fields=public_metrics&max_results=10`)
+async function getData(username) {
+  const { data: { id } } = await getOwnerData(username);
+  const data = await twitter.get(`https://api.twitter.com/2/users/${id}/following?user.fields=public_metrics&max_results=10`)
   .then(response => {
     return response.data
   })
-  .catch(error => console.log(error))
+  .catch(error => console.log(error));
 
   return data || 'error';
 }
+async function getOwnerData(username) {
+  const data = await twitter.get(`https://api.twitter.com/2/users/by/username/${username}?user.fields=public_metrics`)
+  .then( response => response.data)
+  .catch(error => console.log(error));
+  return data || 'error';
+}
+
 module.exports = {
-  getData
+  getData,
+  getOwnerData
 };

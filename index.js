@@ -1,5 +1,5 @@
 const express = require('express');
-const {getData} = require('./src/getTwitterData');
+const {getData, getOwnerData} = require('./src/getTwitterData');
 const cors = require('cors');
 const app = express();
 const port = 3100;
@@ -8,14 +8,14 @@ app.use(express.json())
 app.use(cors());
 
 
-app.use('/get/:id', async (req, res) => {
-  const data = await getData(req.params.id)
+app.use('/get/:username', async (req, res) => {
+  const data = await getData(req.params.username)
   res.send({
     body: data
   })
 });
-app.get('/get-owner/:id', async (req, res) => {
-  const data = await getOwnerData(req.params.id);
+app.get('/get-owner/:username', async (req, res) => {
+  const data = await getOwnerData(req.params.username);
   res.send({
     body: data
   });
