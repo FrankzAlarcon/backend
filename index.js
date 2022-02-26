@@ -2,7 +2,7 @@ const express = require('express');
 const {getData, getOwnerData} = require('./src/getTwitterData');
 const cors = require('cors');
 const app = express();
-const port = 3100;
+const port = 3000;
 
 app.use(express.json())
 app.use(cors());
