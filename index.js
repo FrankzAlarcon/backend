@@ -6,7 +6,7 @@ const port = 3100;
 
 app.use(express.json())
 app.use(cors());
-
+app.set('port', port)
 
 app.use('/get/:username', async (req, res) => {
   const data = await getData(req.params.username)
@@ -21,6 +21,6 @@ app.get('/get-owner/:username', async (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log('Server running on port:' + port)
+app.listen(app.get('port'), () => {
+  console.log('Server running on port:' + app.get('port'));
 });
