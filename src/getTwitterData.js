@@ -1,5 +1,4 @@
 const Twit = require('twit');
-// import Twit from 'twit';
 
 let twitter  = new Twit({
   consumer_key: 'eukrhMeOtHiGlpxzkzMaOUz9b',
@@ -9,9 +8,9 @@ let twitter  = new Twit({
 });
 
 /**Parametros: 1,2,3,4 */
-async function getData(username) {
+async function getData(username, limit) {
   const { data: { id } } = await getOwnerData(username);
-  const data = await twitter.get(`https://api.twitter.com/2/users/${id}/following?user.fields=public_metrics&max_results=10`)
+  const data = await twitter.get(`https://api.twitter.com/2/users/${id}/following?user.fields=public_metrics&max_results=${limit}`)
   .then(response => {
     return response.data
   })

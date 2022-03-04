@@ -11,8 +11,8 @@ app.set('port', process.env.PORT ||port);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/get/:username', async (req, res) => {
-  const data = await getData(req.params.username);
+app.use('/get/:username/:limit', async (req, res) => {
+  const data = await getData(req.params.username, req.params.limit);
   res.send({
     body: data
   })
